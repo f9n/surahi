@@ -6,7 +6,9 @@
 <p><b>Nodejs Global Path:</b> /usr/lib/node_modules</p>
 
 # Why
-<p>When you clone python project, then you install necessary python packages with pip. There are 2 cases. First is that you have internet connection. Second is that you haven't internet connection, but in your pc you have same packages. Example: </p>
+<p>When you clone python project, then you install necessary python packages with pip. There are 2 cases. First is that you have internet connection. Second is that you haven't internet connection, but in your pc you have same packages.</p>
+
+# Pip
 
 ```bash
 $ git clone https://github.com/erginipekci7/flask_mysql_example
@@ -69,7 +71,7 @@ click-6.7.dist-info:
 DESCRIPTION.rst  INSTALLER  METADATA  metadata.json  RECORD  top_level.txt  WHEEL
 ```
 
-# Information
+# Python Package Information
 <p>In python, we have 2 directory. First is package's source code. Second is package's version.</p>
 <p>Example: "flask" and "Flask-0.12.2.dist-info". And require packages list is in "Flask-0.12.2.dist-info/metadata.json" file.</p>
 
@@ -93,38 +95,7 @@ $ cat ~/other_project/venv/lib/python3.6/site-packages/Flask-0.12.2.dist-info/me
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Libraries :: Python Modules"
   ],
-  "extensions": {
-    "python.commands": {
-      "wrap_console": {
-        "flask": "flask.cli:main"
-      }
-    },
-    "python.details": {
-      "contacts": [
-        {
-          "email": "armin.ronacher@active-4.com",
-          "name": "Armin Ronacher",
-          "role": "author"
-        }
-      ],
-      "document_names": {
-        "description": "DESCRIPTION.rst",
-        "license": "LICENSE.txt"
-      },
-      "project_urls": {
-        "Home": "http://github.com/pallets/flask/"
-      }
-    },
-    "python.exports": {
-      "console_scripts": {
-        "flask": "flask.cli:main"
-      }
-    }
-  },
-  "extras": [],
-  "generator": "bdist_wheel (0.29.0)",
-  "license": "BSD",
-  "metadata_version": "2.0",
+  ...
   "name": "Flask",
   "platform": "any",
   "run_requires": [
@@ -143,5 +114,107 @@ $ cat ~/other_project/venv/lib/python3.6/site-packages/Flask-0.12.2.dist-info/me
 
 ```
 
+# Npm
+
+```bash
+$ git clone https://github.com/pleycpl/downloadAllPdf
+$ cd downloadAllPdf
+$ cat package.json
+{
+  "name": "downloadallpdf",
+  "version": "1.0.0",
+  "description": "Download all pdf in tutorialspoint",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mkdir pdfs; node main.js"
+  },
+  ...
+  "homepage": "https://github.com/pleycpl/downloadAllPdf#readme",
+  "dependencies": {
+    "cfonts": "^1.1.2",
+    "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
+    "events": "^1.1.1",
+    "figlet": "^1.2.0",
+    "log-symbols": "^1.0.2",
+    "progress": "^2.0.0",
+    "request": "^2.81.0",
+    "shelljs": "^0.7.7"
+  }
+}
+$ # look Managing the Cache section in "https://www.sitepoint.com/beginners-guide-node-package-manager/"
+$ ls .npm | wc -l
+351
+$ # When you haven't internet connection
+$ npm install
+npm WARN registry Using stale data from https://registry.npmjs.org/ because the host is inaccessible -- are you offline?
+npm WARN registry Using stale package data from https://registry.npmjs.org/ due to a request error during revalidation.
+npm ERR! code ENOTFOUND
+npm ERR! errno ENOTFOUND
+npm ERR! network request to https://registry.npmjs.org/figlet failed, reason: getaddrinfo ENOTFOUND registry.npmjs.org registry.npmjs.org:443
+npm ERR! network This is a problem related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network 
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     ~/.npm/_logs/2017-10-13T09_59_05_174Z-debug.log
+$ npm install   # internet connection
+npm notice created a lockfile as package-lock.json. You should commit this file.
+added 141 packages in 5.692s
+$ ls node_modules
+...
+ansi-regex       css-select            hawk                   lodash.merge          regenerator-runtime
+...
+boom             escape-string-regexp  is-typedarray          no-case               strip-ansi
+brace-expansion  events                is-upper-case          nth-check             supports-color
+camel-case       extend                jsbn                   oauth-sign            swap-case
+caseless         extsprintf            jsonify                once                  title-case
+cfonts           fast-deep-equal       json-schema            param-case            tough-cookie
+chalk            figlet                json-schema-traverse   pascal-case           tunnel
+...
+core-util-is     har-validator         lodash.foreach         readable-stream
+$ rm -r node_modules
+$ ls .npm | wc -l
+351
+$ npm install   # non-internet connection
+npm WARN registry Using stale data from https://registry.npmjs.org/ because the host is inaccessible -- are you offline?
+npm WARN registry Using stale package data from https://registry.npmjs.org/ due to a request error during revalidation.
+npm notice created a lockfile as package-lock.json. You should commit this file.
+added 141 packages in 2.256s
+$ ls .npm | wc -l
+351
+$ # Where is the cache packages:))
+```
+
+<h4>In project's node_modules, we have necessary packages. And In necessary package's node_modules, we have other necessary packages.....</h4>
+
+```bash
+$ git clone https://github.com/pleycpl/downloadAllPdf.git
+$ cd downloadAllPdf
+$ npm install # internet connection
+$ ls node_modules | wc -l
+134
+$ ls node_modules/chalk
+ansi-regex  has-ansi  strip-ansi  supports-color
+$ cat node_modules/chalk/node_modules/ansi-regex/package.json
+{
+  "_from": "ansi-regex@^2.0.0",
+  "_id": "ansi-regex@2.1.1",
+  ...
+  ...
+  "version": "2.1.1",
+  ...
+}
+$ cat node_modules/ansi-regex.json
+{
+  "_from": "ansi-regex@^1.1.0",
+  "_id": "ansi-regex@1.1.1",
+  ...
+  "version": "1.1.1"
+}
+```
 # Next
 <p>Research npm and yarn package managers</p>
