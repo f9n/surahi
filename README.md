@@ -2,6 +2,7 @@
 <p>Sürahi is offline pip. Sürahi is finding packages in other python projects from your Pc. Then, it is copying package files to current venv.</p>
 
 Python Global Path: /usr/lib/python*/site-packages
+Nodejs Global Path: /usr/lib/node_modules
 
 # Why
 <p>When you clone python project, then you install necessary python packages with pip. Example: </p>
@@ -66,3 +67,6 @@ core.py           formatting.py  parser.py    termui.py        types.py      _wi
 click-6.7.dist-info:
 DESCRIPTION.rst  INSTALLER  METADATA  metadata.json  RECORD  top_level.txt  WHEEL
 ```
+
+# Next
+<p>Research npm and yarn package managers</p>
