@@ -31,7 +31,8 @@ func SaveAllPyPackagesPath() error {
 		"/bin/bash",
 		"-c",
 		// "find $HOME -name site-packages -type d | grep 'python3' 2>/dev/null > $HOME/go/src/github.com/pleycpl/surahi/allpyvenvpaths.txt",
-		"find $HOME -name venv -type d > $HOME/go/src/github.com/pleycpl/surahi/allvenvpaths.txt",
+		//"find $HOME -name venv -type d > $HOME/go/src/github.com/pleycpl/surahi/allvenvpaths.txt",
+		"./shellscripts/save_all_py_packages_path.sh",
 	)
 	err := cmd.Run()
 	if err != nil {

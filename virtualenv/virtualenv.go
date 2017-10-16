@@ -35,7 +35,8 @@ func SaveVirtualenvInitFileList() error {
 	cmd := exec.Command(
 		"/bin/bash",
 		"-c",
-		"ls $HOME/go/src/github.com/pleycpl/surahi/venv/lib/python*/site-packages > $HOME/go/src/github.com/pleycpl/surahi/virtualenvinitfilelist.txt",
+		//"ls $HOME/go/src/github.com/pleycpl/surahi/venv/lib/python*/site-packages > $HOME/go/src/github.com/pleycpl/surahi/virtualenvinitfilelist.txt",
+		"./shellscripts/save_virtualenv_init_filelist.sh",
 	)
 	err := cmd.Run()
 	if err != nil {
@@ -49,7 +50,8 @@ func CreateVenv() error {
 	cmd := exec.Command(
 		"/bin/bash",
 		"-c",
-		"virtualenv $HOME/go/src/github.com/pleycpl/surahi/venv",
+		//"virtualenv $HOME/go/src/github.com/pleycpl/surahi/venv",
+		"./shellscripts/create_venv.sh",
 	)
 	err := cmd.Run()
 	if err != nil {
